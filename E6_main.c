@@ -41,7 +41,7 @@ int main()
 	y = l / 2;
 	xInt = 0.0001;
 	grid_size = 11;
-	error = 0.0;
+	error = 1.0;
 
 	// Declaration of arrays
 	double** u1; 
@@ -63,6 +63,8 @@ int main()
 			u1[i][j] = 0.0;
 		}
 	}
+
+	// Initiate arrays with a dipole
 	
 
 	// TASK 1
@@ -84,19 +86,21 @@ int main()
 
 	}
 
-		printf("Error: %f \n", error);
-		printf("First: u1: %d u2 %d\n", **u1, **u2);
 
+	// TASK 2
+	// Use Gauss-Seidel method to solve the problem
+	while(error >= pow(10,-5)){
+
+		// Use Gauss-Seidel method, returns the error
+		error = gauss_seidel(u1, u2, grid_size, error);
+
+		// Print error in terminal
+		printf("Error: %f \n", error);
+
+		// Change pointers
 		temp = u1; 
 		u1 = u2;
 		u2 = temp;
-		printf("Second: u1: %d u2 %d\n", **u1, **u2);
-
-	// TASK 2
-	while(error >= pow(10,-5)){
-		error = gauss_seidel(u1, u2, grid_size, error);
-
-		error = pow(10,-6);
 	}
 	
 	// Close file
