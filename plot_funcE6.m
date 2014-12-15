@@ -1,6 +1,6 @@
 %% E6
 
-phi = dlmread('phi.data');
+phi = importdata('phi.data');
 
 plot(phi);
 %% Plot dipole solution 
