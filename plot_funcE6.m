@@ -1,8 +1,11 @@
 %% E6
+clc
 clf
+clear all
 
-phi = dlmread('phi.data');
-
+phi10 = dlmread('phi10.data');
+phi50 = dlmread('phi50.data');
+phi100 = dlmread('phi100.data');
 
 %% Plot dipole solution 
 L = 1;
@@ -15,4 +18,8 @@ phiDipole = @(x) -(log(abs(x - L/2 - poleDisp)) - log(abs(x - L/2 + poleDisp)))/
 
 Y = phiDipole(X); 
 
-plot(X,Y, X, phi)
+plot(X, Y, '-b', X, phi10, 'g', X, phi50, '-.r', X, phi100, 'm');
+
+l = legend('Free space','Boundary cond 10', 'Boundary cond 50', 'Boundary cond 100');
+set(l,'Interpreter','latex')
+print(gcf,'-depsc2','task1.eps')

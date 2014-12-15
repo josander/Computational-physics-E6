@@ -26,8 +26,8 @@ int main()
 	double x, y, xInt;
 
 	// Initiation of variables
-	m_max = 100; // 10, 50, 100
-	n_max = 100;
+	m_max = 10; // 10, 50, 100
+	n_max = 10;
 	lambda = 1;
 	epsilon0 = 1;
 	l = 1;
@@ -41,7 +41,7 @@ int main()
 
 	// File to save data 
 	FILE *file;
-	file = fopen("phi.data","w");
+	file = fopen("phi10.data","w");
 
 	// Get phi
 	for(x = 0; x < l; x += xInt){
