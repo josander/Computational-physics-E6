@@ -125,7 +125,7 @@ int main()
 	fclose(file);
 	fclose(file2);
 
-	// Free allocated memory
+	// Free allocated memory DOES NOT WORK
 	/*
 	for(i = 0; i < grid_size; i++){
 			free(u1[i]); 
