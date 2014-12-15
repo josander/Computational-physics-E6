@@ -24,8 +24,9 @@ int main()
 	double r, r_c, r_plus, r_minus;
 	double phi;
 	double x, y, xInt;
-	int grid_size;
+	int grid_size. grid_midpoint;
 	double error;
+	double h_sq;
 
 	// Initiation of variables
 	m_max = 10; // 10, 50, 100
@@ -41,12 +42,23 @@ int main()
 	y = l / 2;
 	xInt = 0.0001;
 	grid_size = 11;
-	error = 0.0;
+	grid_midpoint = (grid_size -1)/2;
+	error = 1.0;
+	h_sq = pow(grid_midpoint*2/l,2)
 
 	// Declaration of arrays
-	double u1[grid_size][grid_size];
-	double u2[grid_size][grid_size];
-	double temp[grid_size][grid_size];
+	double** u1; 
+	double** u2;
+	double** temp;
+	u1 = (double**) malloc(grid_size * sizeof(double*));
+	u2 = (double**) malloc(grid_size * sizeof(double*));
+	temp = (double**) malloc(grid_size * sizeof(double*));
+
+	for(i = 0; i < grid_size; i++){
+		u1[i] = (double*) malloc(grid_size * sizeof(double));
+		u2[i] = (double*) malloc(grid_size * sizeof(double));
+		temp[i] = (double*) malloc(grid_size * sizeof(double));
+	}
 
 	// Initiation of arrays
 	for(i = 0; i < grid_size; i++){
@@ -54,7 +66,10 @@ int main()
 			u1[i][j] = 0.0;
 		}
 	}
-	
+
+	// Initiate arrays with a dipole
+	u1[grid_midpoint][grid_midpoint*4/5] = -h_sq;
+	u1[grid_midpoint][grid_midpoint*6/5] = h_sq;	
 
 	// TASK 1
 	// File to save data 
@@ -77,22 +92,23 @@ int main()
 
 
 	// TASK 2
+	// Use Gauss-Seidel method to solve the problem
 	while(error >= pow(10,-5)){
+
 
 		gauss_seidel(u1, u2, grid_size,  &error);
 
-	
-		error = get_error(u1, u2,  grid_size);
 
+		// Use Gauss-Seidel method, returns the error
+		error = gauss_seidel(u1, u2, grid_size, error);
+
+		// Print error in terminal
 		printf("Error: %f \n", error);
-		printf("First: u1: %d u2 %d\n", **u1, **u2);
 
-		**temp = **u1; 
-		**u1 = **u2;
-		**u2 = **temp;
-		printf("Second: u1: %d u2 %d\n", **u1, **u2);
-
-		error = pow(10,-6);
+		// Change pointers
+		temp = u1; 
+		u1 = u2;
+		u2 = temp;
 	}
 	
 	// Close file
