@@ -35,22 +35,25 @@ int main()
 	r_c = l/2;
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
-	x = 1;
-	y = 1;
+	y = l / 2;
 
 	// File to save data 
 	FILE *file;
 	file = fopen("phi.data","w");
 
 	// Get phi
-	phi = 0;
-	for (m = 1; m < m_max + 1; m++){
-		for (n = 1; n < n_max + 1; n++){
-			phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2 * n - 1, 2));
+	for(x = 0; x < l; x += 0.001){
+		phi = 0;
+		for (m = 1; m < m_max + 1; m++){
+			for (n = 1; n < n_max + 1; n++){
+				phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2 * n - 1, 2));
+			}
 		}
+		phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
+		fprintf(file,"%f\n",phi);
 	}
 
-	phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
+
 	
 	// Close file
 	fclose(file);
