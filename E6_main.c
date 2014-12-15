@@ -19,11 +19,11 @@ int main()
 	int m_max, n_max;
 	double lambda;
 	double epsilon0;
-	double l;
+	double l, lInv;
 	double d;
 	double r, r_c, r_plus, r_minus;
 	double phi;
-	double x, y;
+	double x, y, xInt;
 
 	// Initiation of variables
 	m_max = 100; // 10, 50, 100
@@ -31,11 +31,13 @@ int main()
 	lambda = 1;
 	epsilon0 = 1;
 	l = 1;
+	lInv = 1/l;
 	d = 0.2 * l;
 	r_c = l/2;
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
+	xInt = 0.0001;
 
 	// File to save data 
 	FILE *file;
@@ -46,11 +48,13 @@ int main()
 		phi = 0;
 		for (m = 1; m < m_max + 1; m++){
 			for (n = 1; n < n_max + 1; n++){
-				phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2.0 * n - 1, 2));
+				phi += (double) pow(-1, m + n) * sin(PI * m * d * lInv) * sin(2.0 * PI * m * x * lInv) * sin(PI * (2.0 * n - 1) * y * lInv) / ((2.0 * 2.0 * m * m) + pow(2 * n - 1, 2));
 			}
 		}
+
 		phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
 		fprintf(file,"%f\n",phi);
+
 	}
 
 
