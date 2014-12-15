@@ -7,7 +7,9 @@ E6_func.c
 #include <stdlib.h>
 #define PI 3.141592653589
 
-void gauss_seidel(double *u_new, double *u_old, int grid_size, double *error){
+void gauss_seidel(double **u_new, double **u_old, int grid_size, double *error){
+
+	int i, j;
 
 	for(i = 1; i < grid_size; i++){
 		for(j = 1; j < grid_size; j++){

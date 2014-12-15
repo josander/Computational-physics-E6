@@ -15,7 +15,7 @@ int main()
 {
 
 	// Declaration of variables
-	int i,j, m, n;
+	int i, j, m, n;
 	int m_max, n_max;
 	double lambda;
 	double epsilon0;
@@ -41,10 +41,12 @@ int main()
 	y = l / 2;
 	xInt = 0.0001;
 	grid_size = 11;
+	error = 0.0;
 
 	// Declaration of arrays
 	double u1[grid_size][grid_size];
 	double u2[grid_size][grid_size];
+	double temp[grid_size][grid_size];
 
 	// Initiation of arrays
 	for(i = 0; i < grid_size; i++){
@@ -73,9 +75,20 @@ int main()
 
 	}
 
+
 	// TASK 2
-	while(error !< pow(10,-5)){
-		gauss_seidel(u_new, u_old, grid_size,  &error);
+	while(error >= pow(10,-5)){
+		//gauss_seidel(u1, u2, grid_size,  &error);
+
+		printf("Error: %f \n", error);
+		printf("First: u1: %d u2 %d\n", **u1, **u2);
+
+		**temp = **u1; 
+		**u1 = **u2;
+		**u2 = **temp;
+		printf("Second: u1: %d u2 %d\n", **u1, **u2);
+
+		error = pow(10,-6);
 	}
 
 	
