@@ -34,7 +34,7 @@ int main()
 
 	// File to save data 
 	FILE *file;
-	file = fopen("phi.data","w");
+	file = openf("phi.data","w");
 
 	// Get phi
 	//phi = - lambda / (2 * PI * epsilon0) * (log(r - r+) - log(r - r-));
