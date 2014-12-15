@@ -15,7 +15,7 @@ int main()
 {
 
 	// Declaration of variables
-	int m, n;
+	int i,j, m, n;
 	int m_max, n_max;
 	double lambda;
 	double epsilon0;
@@ -24,6 +24,8 @@ int main()
 	double r, r_c, r_plus, r_minus;
 	double phi;
 	double x, y, xInt;
+	int grid_size;
+	double error;
 
 	// Initiation of variables
 	m_max = 10; // 10, 50, 100
@@ -38,7 +40,21 @@ int main()
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
 	xInt = 0.0001;
+	grid_size = 11;
 
+	// Declaration of arrays
+	double u1[grid_size][grid_size];
+	double u2[grid_size][grid_size];
+
+	// Initiation of arrays
+	for(i = 0; i < grid_size; i++){
+		for(j = 0; j < grid_size; j++){
+			u1[i][j] = 0.0;
+		}
+	}
+	
+
+	// TASK 1
 	// File to save data 
 	FILE *file;
 	file = fopen("phi10.data","w");
@@ -57,6 +73,10 @@ int main()
 
 	}
 
+	// TASK 2
+	while(error !< pow(10,-5)){
+		gauss_seidel(u_new, u_old, grid_size,  &error);
+	}
 
 	
 	// Close file
