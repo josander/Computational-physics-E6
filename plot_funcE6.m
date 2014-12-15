@@ -1,6 +1,7 @@
 %% E6
+clf
 
-phi = importdata('phi.data');
+phi = dlmread('phi.data');
 
 plot(phi);
 %%

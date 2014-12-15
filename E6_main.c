@@ -26,8 +26,8 @@ int main()
 	double x, y;
 
 	// Initiation of variables
-	m_max = 50; // 10, 50, 100
-	n_max = 50;
+	m_max = 100; // 10, 50, 100
+	n_max = 100;
 	lambda = 1;
 	epsilon0 = 1;
 	l = 1;
@@ -46,7 +46,7 @@ int main()
 		phi = 0;
 		for (m = 1; m < m_max + 1; m++){
 			for (n = 1; n < n_max + 1; n++){
-				phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2 * n - 1, 2));
+				phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2.0 * n - 1, 2));
 			}
 		}
 		phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
