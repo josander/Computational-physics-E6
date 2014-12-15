@@ -27,5 +27,53 @@ print(gcf,'-depsc2','task1.eps')
 
 %%
 
+data2D = dlmread('phi_task2.data');
+dataSize =size(data2D); 
+figure(1)
+plot(data2D(:,(dataSize(1)/2 +0.5)))
 
 
+figure(2)
+surf(data2D)
+
+%% Sine magic!
+
+gridSize = 41;
+gridMid = gridSize/2 +0.5; 
+singDif = (gridSize-1)*0.1;
+lambda = 1;
+epsi = 1;
+hSq = 1;
+
+factor = lambda*epsi*hSq;
+sineGrid = zeros(gridSize,gridSize);
+grid = zeros(gridSize,gridSize);
+   
+for m=1:gridSize
+   for n = 1:gridSize
+       temp = sin(pi*m*(gridMid+singDif)/gridSize)*sin(pi*n*gridMid/gridSize) - sin(pi*m*(gridMid-singDif)/gridSize)*sin(pi*n*gridMid/gridSize); 
+       sineGrid(m,n) = temp/((pi*m/gridSize)^2+(pi*n/gridSize)^2);
+       
+   end
+    
+    
+end
+for i=1:gridSize
+    for j=1:gridSize
+        for m=1:gridSize
+            for n=1:gridSize
+                grid(i,j) = grid(i,j) + (2/gridSize)^2*sineGrid(m,n)*sin(pi*i*m/gridSize)*sin(pi*j*n/gridSize); 
+                
+                
+            end
+        end 
+    end 
+end
+figure(1)
+
+surf(grid)
+
+figure(2)
+plot(grid(:,gridMid))
+
+figure(3)

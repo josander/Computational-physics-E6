@@ -24,8 +24,9 @@ int main()
 	double r, r_c, r_plus, r_minus;
 	double phi;
 	double x, y, xInt;
-	int grid_size;
+	int grid_size, grid_midpoint;
 	double error;
+	double h_sq;
 
 	// Initiation of variables
 	m_max = 10; // 10, 50, 100
@@ -40,8 +41,10 @@ int main()
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
 	xInt = 0.0001;
-	grid_size = 11;
+	grid_size = 81;
+	grid_midpoint = (grid_size -1)/2;
 	error = 1.0;
+	h_sq = pow((grid_midpoint+1)/l,2);
 
 	// Declaration of arrays
 	double** u1; 
@@ -67,7 +70,8 @@ int main()
 	}
 
 	// Initiate arrays with a dipole
-	
+	u1[grid_midpoint][grid_midpoint*4/5] = -h_sq;
+	u1[grid_midpoint][grid_midpoint*6/5] = h_sq;	
 
 	// TASK 1
 	// File to save data 
@@ -89,7 +93,7 @@ int main()
 		fprintf(file,"%f\n",phi);
 
 	}
-
+	fclose(file);
 
 	// TASK 2
 	FILE *file2;
@@ -98,11 +102,10 @@ int main()
 	// Use Gauss-Seidel method to solve the problem
 	while(error >= pow(10,-5)){
 
-		// Use Gauss-Seidel method, returns the error
-		error = gauss_seidel(u1, u2, grid_size, error);
 
-		// Print error in terminal
-		printf("Error: %f \n", error);
+		// Use Gauss-Seidel method, returns the error
+		error = gauss_seidel(u1, u2, grid_size, error, h_sq);
+
 
 		// Change pointers
 		temp = u1; 
@@ -122,7 +125,7 @@ int main()
 
 	
 	// Close file
-	fclose(file);
+	
 	fclose(file2);
 
 	// Free allocated memory DOES NOT WORK
