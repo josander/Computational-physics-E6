@@ -74,7 +74,7 @@ int main()
 	}
 
 	// TASK 2
-	while(error !< pow(10,-5)){
+	while(error >= pow(10,-5)){
 		gauss_seidel(u_new, u_old, grid_size,  &error);
 	
 	
