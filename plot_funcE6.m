@@ -1,7 +1,9 @@
 %% E6
+clf
 
 phi = dlmread('phi.data', '\t');
 phi = phi(1:end-1);
+
 
 %% Plot dipole solution 
 L = 1;
