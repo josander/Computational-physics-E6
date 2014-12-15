@@ -79,6 +79,8 @@ int main()
 	// TASK 2
 	while(error >= pow(10,-5)){
 		//gauss_seidel(u1, u2, grid_size,  &error);
+	
+		//error = get_error(u_new, u_old,  grid_size);
 
 		printf("Error: %f \n", error);
 		printf("First: u1: %d u2 %d\n", **u1, **u2);
@@ -90,7 +92,6 @@ int main()
 
 		error = pow(10,-6);
 	}
-
 	
 	// Close file
 	fclose(file);
