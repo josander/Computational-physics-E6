@@ -15,13 +15,13 @@ int main()
 {
 
 	// Declaration of variables
-	int i, j, m, n;
+	int m, n;
 	int m_max, n_max;
 	double lambda;
 	double epsilon0;
 	double l;
 	double d;
-	double r_c, r_plus, r_minus;
+	double r, r_c, r_plus, r_minus;
 	double phi;
 
 	// Initiation of variables
@@ -31,7 +31,7 @@ int main()
 	epsilon0 = 1;
 	l = 1;
 	d = 0.2 * l;
-	r_c = 1;
+	r_c = l/2;
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
 
@@ -41,10 +41,13 @@ int main()
 
 	// Get phi
 	phi = 0;
-	//phi = - lambda / (2 * PI * epsilon0) * (log(r - r+) - log(r - r-));
+	for (m = 1; m < m_max + 1; m++){
+		for (n = 1; n < n_max + 1; n++){
+			phi += (double) pow(-1, m + n) * sin(PI * m * d / l) * sin(2.0 * PI * m * x / l) * sin(PI * (2.0 * n - 1) * PI / l) / ((2.0 * 2.0 * m * m) + pow(2 * n - 1, 2));
+		}
+	}
 
-	fprintf(file,"%f\n", phi);
-
+	phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
 	
 	// Close file
 	fclose(file);
