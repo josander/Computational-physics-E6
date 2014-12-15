@@ -25,6 +25,8 @@ int main()
 	double phi;
 
 	// Initiation of variables
+	m_max = 50; // 10, 50, 100
+	n_max = 50;
 	lambda = 1;
 	epsilon0 = 1;
 	l = 1;

@@ -38,7 +38,7 @@ int main()
 	file = fopen("phi.data","w");
 
 	// Get phi
-	phi = 0
+	phi = 0;
 	//phi = - lambda / (2 * PI * epsilon0) * (log(r - r+) - log(r - r-));
 
 	fprintf(file,"%f\n", phi);
