@@ -3,3 +3,4 @@
 phi = dlmread('phi.data');
 
 plot(phi);
+%%
