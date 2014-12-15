@@ -61,6 +61,8 @@ int main()
 	for(i = 0; i < grid_size; i++){
 		for(j = 0; j < grid_size; j++){
 			u1[i][j] = 0.0;
+			u2[i][j] = 0.0;
+			temp[i][j] = 0.0;
 		}
 	}
 
@@ -124,7 +126,15 @@ int main()
 	fclose(file2);
 
 	// Free allocated memory
-	//free(u1); free(u2); free(temp);
-	//u1 = NULL; u2 = NULL; temp = NULL;
+	/*
+	for(i = 0; i < grid_size; i++){
+			free(u1[i]); 
+			free(u2[i]); 
+			free(temp[i]);
+	}
+
+	free(u1); free(u2); free(temp);*/
+
+	u1 = NULL; u2 = NULL; temp = NULL;
 }
 
