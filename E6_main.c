@@ -44,9 +44,18 @@ int main()
 	error = 0.0;
 
 	// Declaration of arrays
-	double u1[grid_size][grid_size];
-	double u2[grid_size][grid_size];
-	double temp[grid_size][grid_size];
+	double** u1; 
+	double** u2;
+	double** temp;
+	u1 = (double**) malloc(grid_size * sizeof(double*));
+	u2 = (double**) malloc(grid_size * sizeof(double*));
+	temp = (double**) malloc(grid_size * sizeof(double*));
+
+	for(i = 0; i < grid_size; i++){
+		u1[i] = (double*) malloc(grid_size * sizeof(double));
+		u2[i] = (double*) malloc(grid_size * sizeof(double));
+		temp[i] = (double*) malloc(grid_size * sizeof(double));
+	}
 
 	// Initiation of arrays
 	for(i = 0; i < grid_size; i++){
@@ -75,20 +84,18 @@ int main()
 
 	}
 
-
-	// TASK 2
-	while(error >= pow(10,-5)){
-		//gauss_seidel(u1, u2, grid_size,  &error);
-	
-		//error = get_error(u_new, u_old,  grid_size);
-
 		printf("Error: %f \n", error);
 		printf("First: u1: %d u2 %d\n", **u1, **u2);
 
-		**temp = **u1; 
-		**u1 = **u2;
-		**u2 = **temp;
+		temp = u1; 
+		u1 = u2;
+		u2 = temp;
 		printf("Second: u1: %d u2 %d\n", **u1, **u2);
+
+	// TASK 2
+	while(error >= pow(10,-5)){
+		//gauss_seidel(u1, u2, grid_size, &error);
+
 
 		error = pow(10,-6);
 	}

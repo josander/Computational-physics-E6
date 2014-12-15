@@ -18,14 +18,6 @@ void gauss_seidel(double **u_new, double **u_old, int grid_size, double *error){
 		}
 	}
 
-}
-
-double get_error(double **u_new, double **u_old, int grid_size){
-
-	int i, j;
-	double error = 0;
-
-
 	for(i = 1; i < grid_size - 1; i++){
 		for(j = 1; j < grid_size - 1; j++){
 			if(fabs(u_new[i][j] - u_old[i][j]) > error){
@@ -33,7 +25,7 @@ double get_error(double **u_new, double **u_old, int grid_size){
 			}	
 		}
 	}
-	return(error);
+
 }
 
 
