@@ -6,7 +6,7 @@ phi = dlmread('phi.data');
 
 %% Plot dipole solution 
 L = 1;
-Lint = 0.00001;
+Lint = 0.0001;
 poleDisp = 0.1*L;
 
 X = 0:Lint:L;

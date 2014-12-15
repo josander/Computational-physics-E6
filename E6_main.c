@@ -37,7 +37,7 @@ int main()
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
-	xInt = 0.00001;
+	xInt = 0.0001;
 
 	// File to save data 
 	FILE *file;
