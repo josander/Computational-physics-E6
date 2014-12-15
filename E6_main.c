@@ -23,6 +23,7 @@ int main()
 	double d;
 	double r, r_c, r_plus, r_minus;
 	double phi;
+	double x, y;
 
 	// Initiation of variables
 	m_max = 50; // 10, 50, 100
@@ -34,6 +35,8 @@ int main()
 	r_c = l/2;
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
+	x = 1;
+	y = 1;
 
 	// File to save data 
 	FILE *file;
