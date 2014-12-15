@@ -37,14 +37,14 @@ int main()
 	r_plus = r_c + d / 2.0;
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
-	xInt = 0.0001;
+	xInt = 0.00001;
 
 	// File to save data 
 	FILE *file;
 	file = fopen("phi.data","w");
 
 	// Get phi
-	for(x = 0; x < l; x += 0.001){
+	for(x = 0; x < l; x += xInt){
 		phi = 0;
 		for (m = 1; m < m_max + 1; m++){
 			for (n = 1; n < n_max + 1; n++){
