@@ -64,6 +64,8 @@ int main()
 	for(i = 0; i < grid_size; i++){
 		for(j = 0; j < grid_size; j++){
 			u1[i][j] = 0.0;
+			u2[i][j] = 0.0;
+			temp[i][j] = 0.0;
 		}
 	}
 
@@ -86,12 +88,17 @@ int main()
 		}
 
 		phi *= (- 2.0 * lambda * 2 * 2 / (epsilon0 * PI * PI));
+
+		// Print solution to file
 		fprintf(file,"%f\n",phi);
 
 	}
 
 
 	// TASK 2
+	FILE *file2;
+	file2 = fopen("phi_task2.data","w");
+
 	// Use Gauss-Seidel method to solve the problem
 	while(error >= pow(10,-5)){
 
@@ -110,9 +117,32 @@ int main()
 		u1 = u2;
 		u2 = temp;
 	}
+
+	// Print the final solution to a file
+	for(i = 0; i < grid_size; i++){
+		for(j = 0; j < grid_size; j++){
+			fprintf(file2, "%f \t", u2[i][j]);
+		}
+		
+		fprintf(file2, "\n");
+		
+	}
+
 	
 	// Close file
 	fclose(file);
+	fclose(file2);
 
+	// Free allocated memory
+	/*
+	for(i = 0; i < grid_size; i++){
+			free(u1[i]); 
+			free(u2[i]); 
+			free(temp[i]);
+	}
+
+	free(u1); free(u2); free(temp);*/
+
+	u1 = NULL; u2 = NULL; temp = NULL;
 }
 
