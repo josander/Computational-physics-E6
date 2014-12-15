@@ -20,10 +20,14 @@ double gauss_seidel(double **u_new, double **u_old, int grid_size, double error,
 			
 			if(j == grid_midpoint){
 				if(i == grid_midpoint*4/5){
-					u_new[i][j] = -pow(grid_midpoint*2/L,2);
+					u_new[i][j] = -h_sq;
 				}
 				else if(i == grid_midpoint*6/5){
-					u_new[i][j] = pow(grid_midpoint*2/L,2);
+					u_new[i][j] = h_sq;
+				}
+				else{
+					u_new[i][j] = 0.25 * (u_old[i+1][j] + u_new[i-1][j] + u_old[i][j+1] + u_new[i][j-1]);
+			
 				}
 			}else{ 
 
@@ -37,6 +41,7 @@ double gauss_seidel(double **u_new, double **u_old, int grid_size, double error,
 			}
 		}
 	}
+	return(error);
 
 
 }

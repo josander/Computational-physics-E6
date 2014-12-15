@@ -24,7 +24,7 @@ int main()
 	double r, r_c, r_plus, r_minus;
 	double phi;
 	double x, y, xInt;
-	int grid_size. grid_midpoint;
+	int grid_size, grid_midpoint;
 	double error;
 	double h_sq;
 
@@ -41,10 +41,10 @@ int main()
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
 	xInt = 0.0001;
-	grid_size = 11;
+	grid_size = 81;
 	grid_midpoint = (grid_size -1)/2;
 	error = 1.0;
-	h_sq = pow(grid_midpoint*2/l,2)
+	h_sq = pow((grid_midpoint+1)/l,2);
 
 	// Declaration of arrays
 	double** u1; 
@@ -93,7 +93,7 @@ int main()
 		fprintf(file,"%f\n",phi);
 
 	}
-
+	fclose(file);
 
 	// TASK 2
 	FILE *file2;
@@ -103,14 +103,9 @@ int main()
 	while(error >= pow(10,-5)){
 
 
-		gauss_seidel(u1, u2, grid_size,  &error);
-
-
 		// Use Gauss-Seidel method, returns the error
-		error = gauss_seidel(u1, u2, grid_size, error);
+		error = gauss_seidel(u1, u2, grid_size, error, h_sq);
 
-		// Print error in terminal
-		printf("Error: %f \n", error);
 
 		// Change pointers
 		temp = u1; 
@@ -130,7 +125,7 @@ int main()
 
 	
 	// Close file
-	fclose(file);
+	
 	fclose(file2);
 
 	// Free allocated memory
