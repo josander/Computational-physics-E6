@@ -93,6 +93,8 @@ int main()
 		fprintf(file,"%f\n",phi);
 
 	}
+
+	// Close file
 	fclose(file);
 
 	// TASK 2
@@ -125,7 +127,6 @@ int main()
 
 	
 	// Close file
-	
 	fclose(file2);
 
 	// Free allocated memory DOES NOT WORK
