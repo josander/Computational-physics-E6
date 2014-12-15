@@ -94,8 +94,7 @@ int main()
 
 	// TASK 2
 	while(error >= pow(10,-5)){
-		//gauss_seidel(u1, u2, grid_size, &error);
-
+		error = gauss_seidel(u1, u2, grid_size, error);
 
 		error = pow(10,-6);
 	}
