@@ -82,3 +82,14 @@ figure(2)
 subplot(2,1,2)
 surf(grid)
 title('Grid solution, fourier transform');
+
+%%
+figure(3)
+dx = linspace(0,1,gridSize);
+[eX eY] = gradient(grid);
+quiver(dx,dx,eX,eY)
+hold on
+contour(dx,dx,grid)
+
+axis([0 1 0 1])
+
