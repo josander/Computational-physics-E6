@@ -42,7 +42,7 @@ title('Grid solution, simulation');
 
 %% Sine magic!
 
-gridSize = 41;
+gridSize = 21;
 gridMid = gridSize/2 +0.5; 
 singDif = (gridSize-1)*0.1;
 lambda = 1;
@@ -89,7 +89,7 @@ dx = linspace(0,1,gridSize);
 [eX eY] = gradient(grid);
 quiver(dx,dx,eX,eY)
 hold on
-contour(dx,dx,grid)
+contour(dx,dx,grid,1)
 
 axis([0 1 0 1])
 

@@ -48,30 +48,24 @@ int main()
 
 	// Declaration of arrays
 	double** u1; 
-	double** u2;
-	double** temp;
+
 	u1 = (double**) malloc(grid_size * sizeof(double*));
-	u2 = (double**) malloc(grid_size * sizeof(double*));
-	temp = (double**) malloc(grid_size * sizeof(double*));
+
 
 	for(i = 0; i < grid_size; i++){
 		u1[i] = (double*) malloc(grid_size * sizeof(double));
-		u2[i] = (double*) malloc(grid_size * sizeof(double));
-		temp[i] = (double*) malloc(grid_size * sizeof(double));
+
 	}
 
 	// Initiation of arrays
 	for(i = 0; i < grid_size; i++){
 		for(j = 0; j < grid_size; j++){
 			u1[i][j] = 0.0;
-			u2[i][j] = 0.0;
-			temp[i][j] = 0.0;
+
 		}
 	}
 
-	// Initiate arrays with a dipole
-	u1[grid_midpoint][grid_midpoint*4/5] = -h_sq;
-	u1[grid_midpoint][grid_midpoint*6/5] = h_sq;	
+
 
 	// TASK 1
 	// File to save data 
@@ -106,19 +100,13 @@ int main()
 
 
 		// Use Gauss-Seidel method, returns the error
-		error = gauss_seidel(u1, u2, grid_size, error, h_sq);
-
-
-		// Change pointers
-		temp = u1; 
-		u1 = u2;
-		u2 = temp;
+		error = gauss_seidel(u1,grid_size);
 	}
 
 	// Print the final solution to a file
 	for(i = 0; i < grid_size; i++){
 		for(j = 0; j < grid_size; j++){
-			fprintf(file2, "%f \t", u2[i][j]);
+			fprintf(file2, "%f \t", u1[i][j]);
 		}
 		
 		fprintf(file2, "\n");
@@ -139,6 +127,6 @@ int main()
 
 	free(u1); free(u2); free(temp);*/
 
-	u1 = NULL; u2 = NULL; temp = NULL;
+	u1 = NULL; 
 }
 
