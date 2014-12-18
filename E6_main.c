@@ -11,8 +11,7 @@
 #define c 299792458 // Units: [m/s]
 
 /* Main program */
-int main()
-{
+int main(){
 
 	// Declaration of variables
 	int i, j, m, n;

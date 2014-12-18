@@ -9,6 +9,11 @@ phi100 = dlmread('phi100.data');
 
 
 %% Plot dipole solution 
+
+clc
+clf
+clear all
+
 L = 1;
 Lint = 0.0001;
 poleDisp = 0.1*L;
@@ -42,7 +47,7 @@ title('Grid solution, simulation');
 
 %% Sine magic!
 
-gridSize = 41;
+gridSize = 21;
 gridMid = gridSize/2 +0.5; 
 singDif = (gridSize-1)*0.1;
 lambda = 1;
@@ -82,3 +87,4 @@ figure(2)
 subplot(2,1,2)
 surf(grid)
 title('Grid solution, fourier transform');
+
