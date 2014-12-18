@@ -31,19 +31,22 @@ set(l,'Interpreter','latex')
 print(gcf,'-depsc2','task1.eps')
 
 %%
+clc
 
 data2D = dlmread('phi_task2.data');
 dataSize =size(data2D); 
+x = linspace(0,1,length(data2D));
 
 figure(1)
 subplot(2,1,1)
-plot(data2D(:,(dataSize(1)/2 +0.5)))
+plot(x,data2D(:,(dataSize(1)/2 +0.5)))
 title('Solution, simulation');
 
 figure(2)
 subplot(2,1,1)
-surf(data2D)
+surf(data2D,'EdgeColor','none')
 title('Grid solution, simulation');
+shading interp
 
 %% Sine magic!
 
@@ -58,8 +61,8 @@ factor = lambda*epsi*hSq;
 sineGrid = zeros(gridSize,gridSize);
 grid = zeros(gridSize,gridSize);
    
-for m=1:gridSize
-   for n = 1:gridSize
+for m=2:gridSize-1
+   for n = 2:gridSize-1
        temp = sin(pi*m*(gridMid+singDif)/gridSize)*sin(pi*n*gridMid/gridSize) - sin(pi*m*(gridMid-singDif)/gridSize)*sin(pi*n*gridMid/gridSize); 
        sineGrid(m,n) = temp/((pi*m/gridSize)^2+(pi*n/gridSize)^2);
        
@@ -67,10 +70,10 @@ for m=1:gridSize
     
     
 end
-for i=1:gridSize
-    for j=1:gridSize
-        for m=1:gridSize
-            for n=1:gridSize
+for i=2:gridSize-1
+    for j=2:gridSize-1
+        for m=2:gridSize-1
+            for n=2:gridSize-1
                 grid(i,j) = grid(i,j) + (2/gridSize)^2*sineGrid(m,n)*sin(pi*i*m/gridSize)*sin(pi*j*n/gridSize); 
                
             end
@@ -86,15 +89,21 @@ title('Solution, fourier transform');
 figure(2)
 subplot(2,1,2)
 surf(grid)
-title('Grid solution, fourier transform');
+title('Grid solution, sine transform');
+
+figure(5)
+clf
+plot(linspace(0,1,21),grid(:,11));
 
 %%
 figure(3)
+hold off
+clf
 dx = linspace(0,1,gridSize);
 [eX eY] = gradient(grid);
 quiver(dx,dx,eX,eY)
 hold on
-contour(dx,dx,grid,1)
+contour(dx,dx,grid,10)
 
-axis([0 1 0 1])
+
 

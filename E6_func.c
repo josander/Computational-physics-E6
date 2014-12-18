@@ -26,10 +26,10 @@ double gauss_seidel(double **u, int grid_size){
 			//If the point is on the dipole
 			if(j == grid_midpoint){
 				if(i == grid_midpoint*4/5){
-					u[i][j] = 0.25 * (u[i+1][j] + u[i-1][j] + u[i][j+1] + u[i][j-1]) + 1; //h_inv_sq * h_sq = 1
+					u[i][j] = 0.25 * (u[i+1][j] + u[i-1][j] + u[i][j+1] + u[i][j-1]) + 0.25; //h_inv_sq * h_sq = 1
 				}
 				else if(i == grid_midpoint*6/5){
-					u[i][j] = 0.25 * (u[i+1][j] + u[i-1][j] + u[i][j+1] + u[i][j-1]) - 1;
+					u[i][j] = 0.25 * (u[i+1][j] + u[i-1][j] + u[i][j+1] + u[i][j-1]) - 0.25;
 				}
 				else{
 					u[i][j] = 0.25 * (u[i+1][j] + u[i-1][j] + u[i][j+1] + u[i][j-1]);

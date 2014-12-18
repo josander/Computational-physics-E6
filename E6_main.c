@@ -14,7 +14,7 @@
 int main(){
 
 	// Declaration of variables
-	int i, j, m, n;
+	int i, j, m, n, nbr_computations;
 	int m_max, n_max;
 	double lambda;
 	double epsilon0;
@@ -28,8 +28,9 @@ int main(){
 	double h_sq;
 
 	// Initiation of variables
-	m_max = 10; // 10, 50, 100
-	n_max = 10;
+	m_max = 100; // 10, 50, 100
+	n_max = m_max;
+	nbr_computations = 0;
 	lambda = 1;
 	epsilon0 = 1;
 	l = 1;
@@ -40,10 +41,13 @@ int main(){
 	r_minus = r_c - d / 2.0;
 	y = l / 2;
 	xInt = 0.0001;
-	grid_size = 81;
+	grid_size = 41; // 11, 21, 41, 81
 	grid_midpoint = (grid_size -1)/2;
 	error = 1.0;
 	h_sq = pow((grid_midpoint+1)/l,2);
+
+	printf("***For grid size: %i***\n", grid_size);
+
 
 	// Declaration of arrays
 	double** u1; 
@@ -65,7 +69,7 @@ int main(){
 	}
 
 
-
+	/*
 	// TASK 1
 	// File to save data 
 	FILE *file;
@@ -89,6 +93,7 @@ int main(){
 
 	// Close file
 	fclose(file);
+*/
 
 	// TASK 2
 	FILE *file2;
@@ -100,6 +105,7 @@ int main(){
 
 		// Use Gauss-Seidel method, returns the error
 		error = gauss_seidel(u1,grid_size);
+		nbr_computations++;
 	}
 
 	// Print the final solution to a file
@@ -112,19 +118,18 @@ int main(){
 		
 	}
 
+	printf("Nbr of computations: %i", nbr_computations);
+
 	
 	// Close file
 	fclose(file2);
 
-	// Free allocated memory DOES NOT WORK
-	/*
+	// Free allocated memory
 	for(i = 0; i < grid_size; i++){
 			free(u1[i]); 
-			free(u2[i]); 
-			free(temp[i]);
 	}
 
-	free(u1); free(u2); free(temp);*/
+	free(u1);
 
 	u1 = NULL; 
 }
